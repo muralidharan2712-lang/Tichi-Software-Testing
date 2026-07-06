@@ -1,0 +1,7 @@
+Application Opened
+Sign In Clicked
+Continue Clicked
+Login Clicked
+Invalid Password Screenshot Saved
+
+Closing Browser...

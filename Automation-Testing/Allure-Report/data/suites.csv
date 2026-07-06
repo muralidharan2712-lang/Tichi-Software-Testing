@@ -1,0 +1,82 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+Test: Entering an invalid email format should show a validation error
+and keep the user on the email entry step (no navigation to password step).
+
+Changes from original:
+- Removed module-level 'driver = webdriver.Chrome()' — chrome fixture used.
+- Removed try/except/finally — exceptions now propagate to pytest.
+- Removed 'import time' and 'time.sleep(3)' — replaced with WebDriverWait
+  for a concrete condition: the email field stays visible (or a URL check),
+  confirming the app did NOT advance to the password step.
+- Added assertion: the password field (By.ID, ""password"") must NOT appear,
+  confirming the app blocked progression on invalid email format.
+","3407","test_invalid_email","","2026-07-06","passed","2026-07-06","","test_invalid_email","",""
+"
+Test: Entering a properly formatted but unregistered email should either:
+- Show an error message and keep the user on the email step, OR
+- Advance to the password step (some apps allow this and show error after password).
+This test asserts that the app stays on the email step (no password field appears).
+
+Changes from original:
+- Removed module-level 'driver = webdriver.Chrome()' — chrome fixture used.
+- Removed try/except/finally — exceptions now propagate to pytest.
+- Removed 'import time' and 'time.sleep(3)' — replaced with WebDriverWait
+  confirming the email field remains visible, meaning the app blocked progression.
+- Added assertion: email field (By.ID, ""email"") must still be displayed,
+  confirming the app did not advance an unregistered email to the password step.
+","3243","test_unregistered_email","","2026-07-06","passed","2026-07-06","","test_unregistered_email","",""
+"
+Test: Submitting an empty email field should block progression —
+the app should stay on the email entry step.
+
+Changes from original:
+- Removed module-level 'driver = webdriver.Chrome()' — chrome fixture used.
+- Removed try/except/finally — exceptions now propagate to pytest.
+- Removed 'import time' and 'time.sleep(3)' — replaced with WebDriverWait
+  confirming the email field remains visible after clicking Continue,
+  meaning the app correctly refused to advance with an empty email.
+- Added assertion: email field (By.ID, ""email"") must still be displayed.
+","2642","test_empty_email","","2026-07-06","passed","2026-07-06","","test_empty_email","",""
+"
+Test: Entering a valid email but wrong password should show an error
+and keep the user on the password/login page.
+
+Changes from original:
+- Removed module-level 'driver = webdriver.Chrome()' — chrome fixture used.
+- Removed try/except/finally — exceptions now propagate to pytest.
+- Replaced 'time.sleep(5)' after login click with WebDriverWait for the
+  password field to remain visible (or an error message to appear),
+  confirming the app rejected the wrong password.
+- Added assertion: the password input field (By.ID, ""password"") is still
+  displayed, meaning the app did not navigate away from the login page.
+- 'time.sleep(0.1)' inside the per-character loop is intentionally kept.
+","6978","test_invalid_password","","2026-07-06","passed","2026-07-06","","test_invalid_password","",""
+"
+Test: Submitting an empty password field should block login —
+the app should stay on the password step, not navigate away.
+
+Changes from original:
+- Removed module-level 'driver = webdriver.Chrome()' — chrome fixture used.
+- Removed try/except/finally — exceptions now propagate to pytest.
+- Removed 'import time' and 'time.sleep(5)' — replaced with WebDriverWait
+  confirming the password field remains visible after clicking Login,
+  meaning the app correctly refused to log in with an empty password.
+- Added assertion: password field (By.ID, ""password"") must still be displayed.
+","4510","test_empty_password","","2026-07-06","passed","2026-07-06","","test_empty_password","",""
+"
+Test: Successful login with valid credentials.
+
+Changes from original:
+- Removed module-level 'driver = webdriver.Chrome()' — the 'chrome' fixture
+  from conftest.py provides the driver and handles teardown via yield.
+- Removed try/except/finally — exceptions now propagate so pytest can
+  correctly report FAIL. The fixture's yield guarantees driver.quit().
+- Replaced 'time.sleep(5)' after login click with WebDriverWait for a
+  post-login element (the dashboard URL change). Fixed sleeps are unreliable
+  and slow; waiting for an actual condition is deterministic.
+- Added assertion: verifies the URL no longer contains '/login', confirming
+  that login succeeded and the app navigated to the dashboard.
+- 'time.sleep(0.1)' inside the per-character loop is intentionally kept —
+  it simulates realistic human typing speed and is not an arbitrary wait.
+","7485","test_valid_login","","2026-07-06","passed","2026-07-06","","test_valid_login","",""

@@ -1,0 +1,6 @@
+Application Opened
+Sign In Clicked
+Login Clicked
+Dashboard Screenshot Saved
+
+Closing Browser...

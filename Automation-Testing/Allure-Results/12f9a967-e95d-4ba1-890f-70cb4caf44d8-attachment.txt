@@ -1,0 +1,6 @@
+Application Opened
+Sign In Clicked
+Continue Clicked
+Invalid Email Format Screenshot Saved
+
+Closing Browser...

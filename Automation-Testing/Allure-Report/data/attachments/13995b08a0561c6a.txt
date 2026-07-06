@@ -1,0 +1,6 @@
+Application Opened
+Sign In Clicked
+Continue Clicked
+Unregistered Email Screenshot Saved
+
+Closing Browser...
